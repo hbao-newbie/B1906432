@@ -1,0 +1,105 @@
+:root {
+    --background-color: #f5f5f5;
+    --background-color-nav: black;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.body-container {
+    display: block;
+}
+
+/* Css cho phần nav setting */
+.nav {
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background-color: var(--background-color-nav);
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    padding: 5px 0px;
+    margin: 0px 2px;
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    background-color: #e9ecef;
+    border-radius: 1px;
+    border: 1px solid #ced4da;
+}
+
+.from-control {
+    padding: 5px 10px;
+    line-height: 1.5;
+    border-radius: 1px;
+    border: 1px solid #ced4da;
+}
+
+.btn {
+    width: 70px;
+    cursor: pointer;
+    margin: 0px 2px;
+}
+
+.input-group-select {
+    cursor: pointer;
+}
+
+/* Css cho phần hiển thị các mô phỏng thuật toán săp xếp */
+.main-one {
+    margin-top: 10px;
+    width: 100%;
+    height: 250px;
+    /* display: flex; */
+}
+
+/* css các element arrays */
+.element {
+    text-align: center;
+    width: 0px;
+    height: 0px;
+    font-size: 20px;
+    display: inline-block;
+}
+
+.element-item {
+    width: 30px;
+    background-color: rgb(159, 60, 60);
+}
+
+.element-item-number {
+    height: 20px;
+    width: 30px;
+    text-align: center;
+    margin-top: 5px;
+    background-color: #ced4da;
+    border-radius: 40%;
+}
+
+.element-item-status .selected {
+    margin-top: 5px;
+    border-bottom: solid #fd7e14 15px ;
+    border-left: solid white 15px;
+    border-right: solid white 15px;
+}
+
+.element-item-status .pivot {
+    margin-top: 5px;
+    border-bottom: solid #198754 15px ;
+    border-left: solid white 15px;
+    border-right: solid white 15px;
+}
