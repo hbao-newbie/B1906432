@@ -5,6 +5,9 @@ async function heapify(arrays, n, i, colors) {
     let l = 2 * i + 1; // khởi tạo con trái
     let r = 2 * i + 2; // khởi tạo con phải
 
+    // đánh dấu là phần tử root
+    arrays[i].isSelected = true;
+
     // đánh dấu các phần tử largest, left, right
     arrays[largest].color = colors.largest;
     if (l < n) arrays[l].color = colors.left;
@@ -28,7 +31,7 @@ async function heapify(arrays, n, i, colors) {
         for (let speed = 0; speed < findspeed * 8; speed ++) {
             arrays[i].x += 5;
             arrays[largest].x -= 5;
-            await sleep(50);
+            await sleep(20);
         }
 
         let temp = arrays[i].data;
@@ -39,6 +42,9 @@ async function heapify(arrays, n, i, colors) {
         arrays[largest].x += 40 * findspeed;
         arrays[i].x -= 40 * findspeed;
 
+        // hủy đánh dấu là phần tử root
+        arrays[i].isSelected = false;
+
         // tô lại màu
         arrays[i].color = colors.orginal;
         arrays[largest].color = colors.orginal;
@@ -47,6 +53,9 @@ async function heapify(arrays, n, i, colors) {
 
         await heapify(arrays, n, largest, colors);
     }
+
+    // hủy đánh dấu là phần tử root
+    arrays[i].isSelected = false;
     
     // tô lại màu
     arrays[i].color = colors.orginal;
@@ -70,7 +79,7 @@ async function heapsort(arrays, n, colors) {
         for (let speed = 0; speed < i * 8; speed++) {
             arrays[0].x += 5;
             arrays[i].x -= 5;
-            await sleep(10);
+            await sleep(20);
         }
 
         // đổi phần tử đầu và phần tử cuối

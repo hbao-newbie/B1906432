@@ -7,8 +7,6 @@
             </div>
             <div class="input-group">
                 <button class="btn" @click="random()">Random</button>
-                <button class="btn" @click="start()">Start</button>
-                <button class="btn" @click="clear()">Clear</button>
             </div>
             <div class="input-group">
                 <select class="input-group-select"
@@ -31,6 +29,17 @@
                         {{fast}}x
                     </option>
                 </select>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Nhập các phần tử</span>
+                <input class="from-control from-text" type="text" v-model="stringElement">
+            </div>
+            <div class="input-group">
+                <button class="btn" @click="create()">Create</button>
+            </div>
+            <div class="input-group">
+                <button class="btn" @click="start()">Start</button>
+                <button class="btn" @click="clear()">Clear</button>
             </div>
         </div>
         <div class="main-one">
@@ -99,11 +108,17 @@
                         name: "Heap sort"
                     }
                 ],
+                // mặc định chọn thuật toán buble sort
                 selectAlgorithm: 1,
-                listFastSort: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                // tốc độ chạy các thuật toán
+                listFastSort: [1, 2, 3, 4, 5],
+                // độ dài mặc định để random mảng
                 length: 15,
+                // mảng của các phần tử chứa các object
                 arrayElements: [],
+                // đánh dấu mảng đã sắp xếp hay chưa => biến này chưa được sủ dụng
                 isSorted: true,
+                // bảng màu dùng trong việc đánh dấu các phần tử
                 colors: {
                     orginal: '#0dcaf0',
                     selected: '#198754',
@@ -116,15 +131,19 @@
                     tick: '#13385c',
                     largest: '#6c757d',
                 },
-                arraysLeft: [], // hỗ trợ cho thuật toán merge sort
-                arraysRight: [], // hỗ trợ cho thuật toán merge sort
+                // nhận vào một các phần tử chỉ là số
+                stringElement: '',
+                // tốc độ chạy mặc định của thuật toán => biến này hiện tại chưa áp dụng
+                fast: 100,
             }
         },
         methods: {
             random() {
+                // chỉ cho phép tạo tối đa 20 phần tử
                 if ( this.length <= 20 ) {
                     // tạo một mảng temp
                     const temp = [];
+                    // mảng temp này chứa các phần tử i từ 1 -> this.lenght
                     for (let i = 1; i <= this.length; i++) {
                         temp.push({
                             // height: i*10,
@@ -150,10 +169,56 @@
                     alert("Giới hạn chỉ có 20 phần tử");
                 }
             },
+            create() {
+                if (this.stringElement === '') {
+                    alert("Bạn chưa nhập gì!!!");
+                } else {
+                    this.length = 0;
+                    this.arrayElements = [];
+                    // tách chuỗi bởi các dấu phân cách
+                    let ArrayNumbers = [];
+                    for (let i = 0; i < this.stringElement.split(/[,;]/).length; i++) {
+                        // kiểm tra xem nó có phải là số hay không
+                        if (
+                            parseInt(this.stringElement.split(/[,;]/)[i]) 
+                            && parseInt(this.stringElement.split(/[,;]/)[i]) <= 20
+                            && parseInt(this.stringElement.split(/[,;]/)[i]) >= 1
+                        ) {
+                            ArrayNumbers.push(parseInt(this.stringElement.split(/[,;]/)[i]));
+                        } else {
+                            alert("Các phần tử phải là số và cách nhau bởi ',' hoặc ';' và giới hạn từ 1 đến 20");
+                            ArrayNumbers = [];
+                            break;
+                        }   
+                    }
+
+                    // tạo mảng các phần tử
+                    for (let i = 0; i < ArrayNumbers.length; i++) {
+                        if (ArrayNumbers[i]) {
+                            this.arrayElements.push({
+                            // height: i*10,
+                            data: ArrayNumbers[i],
+                            color: this.colors.orginal,
+                            isSelected: false, // dùng thuật selection sort
+                            isPivot: false, // dùng cho thuật quick sort   
+                            });
+                        }
+                    }
+
+                    // thêm x y vào để tạo transform
+                    let x = 0;
+                    for(let i = 0; i < this.arrayElements.length; i++) {
+                        x += 40;
+                        this.arrayElements[i].x = x;
+                        this.arrayElements[i].y = 0;
+                    }
+                    this.length = this.arrayElements.length;
+                }  
+            },
             async start() {
                 // nếu hàm random chưa kích hoạt trước đó thì nó sẽ được gọi lại trong hàm start
                 if (this.arrayElements.length === 0) {
-                    this.random();
+                    alert("Bạn chưa tạo mảng!!!");
                 }
 
                 let selectedAlgorithm = parseInt(this.selectAlgorithm);
