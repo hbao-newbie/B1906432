@@ -1,7 +1,7 @@
 import { sleep } from "../tools";
 
 async function heapify(arrays, n, i, colors) {
-    let largest = i; // khởi tạo root
+    let largest = i; // khởi tạo root   
     let l = 2 * i + 1; // khởi tạo con trái
     let r = 2 * i + 2; // khởi tạo con phải
 

@@ -77,7 +77,8 @@
     import InsertionSort from "./utils/AlogrithmsSort/InsertionSort.js";
     import QuickSort from "./utils/AlogrithmsSort/QuickSort.js";
     import MergeSort from "./utils/AlogrithmsSort/MergeSort.js";
-    import HeapSort from "./utils/AlogrithmsSort/HeapSort.js"
+    import HeapSort from "./utils/AlogrithmsSort/HeapSort.js";
+    import ShellSort from "./utils/AlogrithmsSort/ShellSort.js";
     export default {
         data() {
             return {
@@ -106,6 +107,10 @@
                     {
                         id: 6,
                         name: "Heap sort"
+                    },
+                    {
+                        id: 7,
+                        name: "Shell Sort"
                     }
                 ],
                 // mặc định chọn thuật toán buble sort
@@ -242,6 +247,9 @@
                     case 6:
                         HeapSort(this.length, this.arrayElements, this.colors);
                         break;
+                    case 7:
+                        ShellSort(this.length, this.arrayElements, this.colors);
+                        break;
                     default:
                         BubleSort(this.length, this.arrayElements, this.colors);
                     break;
@@ -249,6 +257,7 @@
             },
             clear() {
                 this.arrayElements = [];
+                this.stringElement = '';
             }
         },
     }
