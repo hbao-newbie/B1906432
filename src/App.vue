@@ -78,7 +78,7 @@
     import QuickSort from "./utils/AlogrithmsSort/QuickSort.js";
     import MergeSort from "./utils/AlogrithmsSort/MergeSort.js";
     import HeapSort from "./utils/AlogrithmsSort/HeapSort.js";
-    import ShellSort from "./utils/AlogrithmsSort/ShellSort.js";
+    import ShakerSort from "./utils/AlogrithmsSort/ShakerSort.js";
     export default {
         data() {
             return {
@@ -110,7 +110,7 @@
                     },
                     {
                         id: 7,
-                        name: "Shell Sort"
+                        name: "Shaker sort"
                     }
                 ],
                 // mặc định chọn thuật toán buble sort
@@ -194,7 +194,7 @@
                             alert("Các phần tử phải là số và cách nhau bởi ',' hoặc ';' và giới hạn từ 1 đến 20");
                             ArrayNumbers = [];
                             break;
-                        }   
+                        }
                     }
 
                     // tạo mảng các phần tử
@@ -248,7 +248,7 @@
                         HeapSort(this.length, this.arrayElements, this.colors);
                         break;
                     case 7:
-                        ShellSort(this.length, this.arrayElements, this.colors);
+                        ShakerSort(this.length, this.arrayElements, this.colors);
                         break;
                     default:
                         BubleSort(this.length, this.arrayElements, this.colors);
