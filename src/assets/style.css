@@ -79,16 +79,17 @@
     height: 0px;
     font-size: 20px;
     display: inline-block;
+    margin-right: 5px;
 }
 
 .element-item {
-    width: 30px;
+    width: 40px;
     background-color: rgb(159, 60, 60);
 }
 
 .element-item-number {
     height: 20px;
-    width: 30px;
+    width: 40px;
     text-align: center;
     margin-top: 5px;
     background-color: #ced4da;
@@ -97,14 +98,14 @@
 
 .element-item-status .selected {
     margin-top: 5px;
-    border-bottom: solid #fd7e14 15px ;
-    border-left: solid white 15px;
-    border-right: solid white 15px;
+    border-bottom: solid #fd7e14 20px ;
+    border-left: solid white 20px;
+    border-right: solid white 20px;
 }
 
 .element-item-status .pivot {
     margin-top: 5px;
-    border-bottom: solid #198754 15px ;
-    border-left: solid white 15px;
-    border-right: solid white 15px;
+    border-bottom: solid #198754 20px ;
+    border-left: solid white 20px;
+    border-right: solid white 20px;
 }

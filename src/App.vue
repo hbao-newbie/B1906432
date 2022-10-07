@@ -122,7 +122,7 @@
                 // mảng của các phần tử chứa các object
                 arrayElements: [],
                 // đánh dấu mảng đã sắp xếp hay chưa => biến này chưa được sủ dụng
-                isSorted: true,
+                isSorted: false,
                 // bảng màu dùng trong việc đánh dấu các phần tử
                 colors: {
                     orginal: '#0dcaf0',
@@ -140,13 +140,14 @@
                 stringElement: '',
                 // tốc độ chạy các thuật toán
                 listFastSort: [1, 2, 3, 4, 5],
-                // tốc độ chạy mặc định của thuật toán => biến này hiện tại chưa áp dụng
+                // tốc độ chạy mặc định của thuật toán
                 fast: 100,
                 speed: 2,
             }
         },
         methods: {
             random() {
+                this.isSorted = false;
                 // chỉ cho phép tạo tối đa 20 phần tử
                 if ( this.length <= 20 ) {
                     // tạo một mảng temp
@@ -178,6 +179,7 @@
                 }
             },
             create() {
+                this.isSorted = false;
                 if (this.stringElement === '') {
                     alert("Bạn chưa nhập gì!!!");
                 } else {
@@ -229,35 +231,51 @@
                     alert("Bạn chưa tạo mảng!!!");
                 }
 
-                let selectedAlgorithm = parseInt(this.selectAlgorithm);
-                let speed = parseInt(this.speed);
+                if (this.isSorted) {
+                    // Nếu mảng đã được sắp xếp nó sẽ random lại
+                    this.random();
+                    this.isSorted = false;
+                } else {
+                    let selectedAlgorithm = parseInt(this.selectAlgorithm);
+                    let speed = parseInt(this.speed);
 
-                switch (selectedAlgorithm) {
-                    case 1:
-                        BubleSort(this.length, this.arrayElements, this.colors, this.fast/speed);
+                    switch (selectedAlgorithm) {
+                        case 1:
+                            BubleSort(this.length, this.arrayElements, this.colors, this.fast/speed);
+                            this.isSorted = true;
+                            break;
+                        case 2:
+                            InsertionSort(this.length, this.arrayElements, this.colors, this.fast/speed);
+                            this.isSorted = true;
+                            break;
+                        case 3:
+                            SelectionSort(this.length, this.arrayElements, this.colors, this.fast/speed);
+                            this.isSorted = true;
+                            break;
+                        case 4:
+                            QuickSort(this.length, this.arrayElements, this.colors, this.fast/speed);
+                            this.isSorted = true;
+                            break;
+                        case 5:
+                            MergeSort(this.length, this.arrayElements, this.colors, this.fast/speed);
+                            this.isSorted = true;
+                            break;
+                        case 6:
+                            HeapSort(this.length, this.arrayElements, this.colors, this.fast/speed);
+                            this.isSorted = true;
+                            break;
+                        case 7:
+                            ShakerSort(this.length, this.arrayElements, this.colors, this.fast/speed);
+                            this.isSorted = true;
+                            break;
+                        default:
+                            BubleSort(this.length, this.arrayElements, this.colors, this.fast/speed);
+                            this.isSorted = true;
                         break;
-                    case 2:
-                        InsertionSort(this.length, this.arrayElements, this.colors, this.fast/speed);
-                        break;
-                    case 3:
-                        SelectionSort(this.length, this.arrayElements, this.colors, this.fast/speed);
-                        break;
-                    case 4:
-                        QuickSort(this.length, this.arrayElements, this.colors, this.fast/speed);
-                        break;
-                    case 5:
-                        MergeSort(this.length, this.arrayElements, this.colors, this.fast/speed);
-                        break;
-                    case 6:
-                        HeapSort(this.length, this.arrayElements, this.colors, this.fast/speed);
-                        break;
-                    case 7:
-                        ShakerSort(this.length, this.arrayElements, this.colors, this.fast/speed);
-                        break;
-                    default:
-                        BubleSort(this.length, this.arrayElements, this.colors, this.fast/speed);
-                    break;
+                    }
                 }
+
+                
             },
             clear() {
                 this.arrayElements = [];

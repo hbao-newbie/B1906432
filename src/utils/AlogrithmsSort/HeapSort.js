@@ -82,7 +82,7 @@ async function heapsort(arrays, n, colors, fast) {
         for (let speed = 0; speed < i * 8; speed++) {
             arrays[0].x += 5;
             arrays[i].x -= 5;
-            await sleep(fast/2);
+            await sleep(fast/4);
         }
 
         // đổi phần tử đầu và phần tử cuối
