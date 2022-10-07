@@ -1,6 +1,9 @@
+/**
+ * OK -- 07/10/2022
+ */
 import {sleep} from "../tools.js";
 
-export default async function (lenght, arrays, colors) {
+export default async function (lenght, arrays, colors, fast) {
     let left = 0;
     let right = lenght - 1;
     let k = 0;
@@ -15,7 +18,7 @@ export default async function (lenght, arrays, colors) {
                 for (let speed = 0; speed < 8; speed++) {
                     arrays[i].x += 5;
                     arrays[i + 1].x -= 5;
-                    await sleep(50);
+                    await sleep(fast/2);
                 }
 
                 let temp = arrays[i].data;
@@ -41,7 +44,7 @@ export default async function (lenght, arrays, colors) {
                 for (let speed = 0; speed < 8; speed++) {
                     arrays[i].x -= 5;
                     arrays[i - 1].x += 5;
-                    await sleep(50);
+                    await sleep(fast/2);
                 }
 
                 let temp = arrays[i].data;

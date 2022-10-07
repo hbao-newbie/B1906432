@@ -1,6 +1,9 @@
+/**
+ *  OK - 07/10/2022
+ */
 import { sleep } from "../tools";
 
-async function heapify(arrays, n, i, colors) {
+async function heapify(arrays, n, i, colors, fast) {
     let largest = i; // khởi tạo root   
     let l = 2 * i + 1; // khởi tạo con trái
     let r = 2 * i + 2; // khởi tạo con phải
@@ -31,14 +34,14 @@ async function heapify(arrays, n, i, colors) {
         for (let speed = 0; speed < findspeed * 8; speed ++) {
             arrays[i].x += 5;
             arrays[largest].x -= 5;
-            await sleep(20);
+            await sleep(fast/2);
         }
 
         let temp = arrays[i].data;
         arrays[i].data = arrays[largest].data;
         arrays[largest].data = temp;
 
-        // hoàn hiệu ứng
+        // trả về vị trí ban đầu của các phần tử
         arrays[largest].x += 40 * findspeed;
         arrays[i].x -= 40 * findspeed;
 
@@ -51,7 +54,7 @@ async function heapify(arrays, n, i, colors) {
         if (l < n) arrays[l].color = colors.orginal;
         if (r < n) arrays[r].color = colors.orginal;
 
-        await heapify(arrays, n, largest, colors);
+        await heapify(arrays, n, largest, colors, fast);
     }
 
     // hủy đánh dấu là phần tử root
@@ -64,22 +67,22 @@ async function heapify(arrays, n, i, colors) {
     if (r < n) arrays[r].color = colors.orginal;
 }
 
-async function heapsort(arrays, n, colors) {
+async function heapsort(arrays, n, colors, fast) {
     // build heap
     for (let i = parseInt(n / 2 - 1); i >= 0; i--) {
-        await heapify(arrays, n, i, colors);
+        await heapify(arrays, n, i, colors, fast);
     }
 
     for (let i = n - 1; i > 0; i--) {
         // đánh dấu 2 phần tử đầu và cuối
         arrays[i].color = colors.right;
         arrays[0].color = colors.left;
-        await sleep(200);
+        await sleep(fast);
         // tạo hiệu ứng đổi giữa 2 phần tử đầu và cuối
         for (let speed = 0; speed < i * 8; speed++) {
             arrays[0].x += 5;
             arrays[i].x -= 5;
-            await sleep(20);
+            await sleep(fast/2);
         }
 
         // đổi phần tử đầu và phần tử cuối
@@ -91,17 +94,17 @@ async function heapsort(arrays, n, colors) {
         arrays[0].x -= 40 * i;
         arrays[i].x += 40 * i;
 
-        await sleep(100);
+        await sleep(fast);
 
         // xóa đánh dấu
         // đánh dấu đã sắp xếp
         arrays[i].color = colors.sorted;
 
-        await heapify(arrays, i, 0, colors);
+        await heapify(arrays, i, 0, colors, fast);
     }
     arrays[0].color = colors.sorted;
 }
 
-export default async function (length, arrays, colors) {
-    heapsort(arrays, length, colors);
+export default async function (length, arrays, colors, fast) {
+    heapsort(arrays, length, colors, fast);
 }

@@ -1,6 +1,9 @@
+/**
+ * OK -- 07/10/2022
+ */
 import { sleep } from "../tools";
 
-export default async function (length, arrays, colors) {
+export default async function (length, arrays, colors, fast) {
     let lowkey;
     let lowindex;
 
@@ -13,16 +16,17 @@ export default async function (length, arrays, colors) {
         arrays[i].isSelected = true;
 
         for (let j = i + 1; j < length; j++) {
-            // hiệu ứng duyệt qua phần tử/
+            // hiệu ứng duyệt qua phần tử
             arrays[j].color = colors.selected;
-            await sleep(200);
+            await sleep(fast*2);
             arrays[j].color = colors.orginal;
 
             if (arrays[j].data < lowkey) {
+
                 // gán lại màu cho phần tử nhỏ nhất đã trọn trước đó
                 arrays[lowindex].color = colors.orginal;
                 arrays[lowindex].isSelected = false;
-                await sleep(100);
+                await sleep(fast);
 
                 lowkey = arrays[j].data;
                 lowindex = j;
@@ -30,7 +34,7 @@ export default async function (length, arrays, colors) {
                 // gán lại màu cho phần tử đã được chọn
                 arrays[lowindex].color = colors.lowkey;
                 arrays[lowindex].isSelected = true;
-                await sleep(100);
+                await sleep(fast);
             }
         }
 
@@ -41,16 +45,18 @@ export default async function (length, arrays, colors) {
         for (let speed = 0; speed < findspeed * 8; speed++) {
             arrays[lowindex].x -= 5;
             arrays[i].x += 5;
-            await sleep(10);            
+            await sleep(fast/10);
         }
 
+        // swap
         let temp = arrays[lowindex].data;
         arrays[lowindex].data = arrays[i].data;
         arrays[i].data = temp;
+
         // xóa đánh dấu
         arrays[lowindex].isSelected = false;
 
-        // hoàn lại hiệu ứng
+        // trả lại vị trí ban đầu cho các phần tử
         arrays[lowindex].x += 40 * findspeed;
         arrays[i].x -= 40 * findspeed;
 

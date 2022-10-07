@@ -10,7 +10,7 @@
             </div>
             <div class="input-group">
                 <select class="input-group-select"
-                    v-model="selectAlgorithm" 
+                    v-model="selectAlgorithm"
                 >
                     <option
                         v-for="(algorithm, index) in listAlgorithmSort" :key="index"
@@ -21,7 +21,9 @@
                 </select>
             </div>
             <div class="input-group">
-                <select class="input-group-select">
+                <select class="input-group-select"
+                    v-model="speed"
+                >
                     <option 
                         v-for="(fast, index) in listFastSort" :key="index"
                         :value="fast"
@@ -82,7 +84,7 @@
     export default {
         data() {
             return {
-                // các option trước khi chạy thuật toán
+                // danh sách các thuật toán
                 listAlgorithmSort: [
                     {
                         id: 1,
@@ -115,8 +117,6 @@
                 ],
                 // mặc định chọn thuật toán buble sort
                 selectAlgorithm: 1,
-                // tốc độ chạy các thuật toán
-                listFastSort: [1, 2, 3, 4, 5],
                 // độ dài mặc định để random mảng
                 length: 15,
                 // mảng của các phần tử chứa các object
@@ -136,10 +136,13 @@
                     tick: '#13385c',
                     largest: '#6c757d',
                 },
-                // nhận vào một các phần tử chỉ là số
+                // nhận vào một các phần tử chỉ là số để tạo mảng
                 stringElement: '',
+                // tốc độ chạy các thuật toán
+                listFastSort: [1, 2, 3, 4, 5],
                 // tốc độ chạy mặc định của thuật toán => biến này hiện tại chưa áp dụng
                 fast: 100,
+                speed: 2,
             }
         },
         methods: {
@@ -191,6 +194,7 @@
                         ) {
                             ArrayNumbers.push(parseInt(this.stringElement.split(/[,;]/)[i]));
                         } else {
+                            // hiển thị thông báo cho người dùng nhập sai
                             alert("Các phần tử phải là số và cách nhau bởi ',' hoặc ';' và giới hạn từ 1 đến 20");
                             ArrayNumbers = [];
                             break;
@@ -201,11 +205,10 @@
                     for (let i = 0; i < ArrayNumbers.length; i++) {
                         if (ArrayNumbers[i]) {
                             this.arrayElements.push({
-                            // height: i*10,
-                            data: ArrayNumbers[i],
-                            color: this.colors.orginal,
-                            isSelected: false, // dùng thuật selection sort
-                            isPivot: false, // dùng cho thuật quick sort   
+                                data: ArrayNumbers[i],
+                                color: this.colors.orginal,
+                                isSelected: false, // dùng thuật selection sort
+                                isPivot: false, // dùng cho thuật quick sort   
                             });
                         }
                     }
@@ -227,31 +230,32 @@
                 }
 
                 let selectedAlgorithm = parseInt(this.selectAlgorithm);
+                let speed = parseInt(this.speed);
 
                 switch (selectedAlgorithm) {
                     case 1:
-                        BubleSort(this.length, this.arrayElements, this.colors);
+                        BubleSort(this.length, this.arrayElements, this.colors, this.fast/speed);
                         break;
                     case 2:
-                        InsertionSort(this.length, this.arrayElements, this.colors);
+                        InsertionSort(this.length, this.arrayElements, this.colors, this.fast/speed);
                         break;
                     case 3:
-                        SelectionSort(this.length, this.arrayElements, this.colors);
+                        SelectionSort(this.length, this.arrayElements, this.colors, this.fast/speed);
                         break;
                     case 4:
-                        QuickSort(this.length, this.arrayElements, this.colors);
+                        QuickSort(this.length, this.arrayElements, this.colors, this.fast/speed);
                         break;
                     case 5:
-                        MergeSort(this.length, this.arrayElements, this.colors);
+                        MergeSort(this.length, this.arrayElements, this.colors, this.fast/speed);
                         break;
                     case 6:
-                        HeapSort(this.length, this.arrayElements, this.colors);
+                        HeapSort(this.length, this.arrayElements, this.colors, this.fast/speed);
                         break;
                     case 7:
-                        ShakerSort(this.length, this.arrayElements, this.colors);
+                        ShakerSort(this.length, this.arrayElements, this.colors, this.fast/speed);
                         break;
                     default:
-                        BubleSort(this.length, this.arrayElements, this.colors);
+                        BubleSort(this.length, this.arrayElements, this.colors, this.fast/speed);
                     break;
                 }
             },
