@@ -155,8 +155,8 @@
                     // mảng temp này chứa các phần tử i từ 1 -> this.lenght
                     for (let i = 1; i <= this.length; i++) {
                         temp.push({
-                            // height: i*10,
-                            data: i,
+                            // tạo ngẫu nhiên data
+                            data: Math.floor(Math.random() * 20) + 1,
                             color: this.colors.orginal,
                             isSelected: false, // dùng thuật selection sort
                             isPivot: false, // dùng cho thuật quick sort   
