@@ -45,6 +45,7 @@
             </div>
         </div>
         <div class="main-one">
+            <div class="element" style="height: 250px;"></div>
             <div
                 class="element"
                 v-for="(element, index) in arrayElements" :key="index"
