@@ -57,7 +57,7 @@ async function merge(arrays, l, m, r, colors, fast) {
             // tạo hiệu ứng thêm từ mảng L[i] vào arr[k]
             for(let speed = 0; speed < 10; speed++) {
                 arrays[k].y -= 30;
-                await sleep(fast);
+                await sleep(fast/2);
             }
 
             // hiển thị arr và đánh dấu
