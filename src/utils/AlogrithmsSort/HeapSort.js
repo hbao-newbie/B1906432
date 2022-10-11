@@ -34,7 +34,7 @@ async function heapify(arrays, n, i, colors, fast) {
         for (let speed = 0; speed < findspeed * 8; speed ++) {
             arrays[i].x += 5;
             arrays[largest].x -= 5;
-            await sleep(fast/2);
+            await sleep(fast/4);
         }
 
         let temp = arrays[i].data;
