@@ -82,6 +82,8 @@
     import MergeSort from "./utils/AlogrithmsSort/MergeSort.js";
     import HeapSort from "./utils/AlogrithmsSort/HeapSort.js";
     import ShakerSort from "./utils/AlogrithmsSort/ShakerSort.js";
+    // import support SSR
+    import { swalert } from "@/mixins/swal.mixin";
     export default {
         data() {
             return {
@@ -182,7 +184,14 @@
             create() {
                 this.isSorted = false;
                 if (this.stringElement === '') {
-                    alert("Bạn chưa nhập gì!!!");
+                    swalert
+                        .fire({
+                            title: "Đầu vào rỗng!",
+                            icon: "warning",
+                            text: "Vui lòng nhập dữ liệu đầu vào.",
+                            showCloseButton: true,
+                            // showCancelButton: true,
+                        })
                 } else {
                     this.length = 0;
                     this.arrayElements = [];
@@ -198,7 +207,14 @@
                             ArrayNumbers.push(parseInt(this.stringElement.split(/[,;]/)[i]));
                         } else {
                             // hiển thị thông báo cho người dùng nhập sai
-                            alert("Các phần tử phải là số và cách nhau bởi ',' hoặc ';' và giới hạn từ 1 đến 20");
+                            swalert
+                                .fire({
+                                    title: "Đầu vào không đúng!",
+                                    icon: "warning",
+                                    text: "Đầu vào phải là các con số và được cách nhau bởi dấu , hoặc ; và có giá trị từ 1 đến 20.",
+                                    showCloseButton: true,
+                                    // showCancelButton: true,
+                                });
                             ArrayNumbers = [];
                             break;
                         }
@@ -229,7 +245,14 @@
             async start() {
                 // nếu hàm random chưa kích hoạt trước đó thì nó sẽ được gọi lại trong hàm start
                 if (this.arrayElements.length === 0) {
-                    alert("Bạn chưa tạo mảng!!!");
+                    swalert
+                        .fire({
+                            title: "Mảng chưa được khởi tạo!",
+                            icon: "warning",
+                            text: "Vui lòng khởi tạo mảng trước khi start.",
+                            showCloseButton: true,
+                            // showCancelButton: true,
+                        });
                 }
 
                 if (this.isSorted) {
