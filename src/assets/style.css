@@ -109,3 +109,19 @@
     border-left: solid white 20px;
     border-right: solid white 20px;
 }
+
+
+/* CSS cho thuat toan merge sort */
+
+.main-two {
+    margin-top: 10px;
+    display: inline-flex;
+}
+
+.main-two-item1 {
+    height: 250px;
+}
+
+.main-two-item2 {
+    height: 250px;
+}

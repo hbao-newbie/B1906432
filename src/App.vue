@@ -146,6 +146,10 @@
                 // tốc độ chạy mặc định của thuật toán
                 fast: 100,
                 speed: 2,
+
+                // hỗ trợ minh họa thuật toán merge sort
+                arrayRight: [],
+                arrayLeft: [],
             }
         },
         methods: {
